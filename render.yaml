@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: telemetry-api
+    env: dotnet
+    buildCommand: dotnet publish -c Release -o ./publish
+    startCommand: dotnet ./publish/TelemetryAPI.dll
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: http://0.0.0.0:10000
+      - key: ApplicationInsights__ConnectionString
+        sync: false
+    healthCheckPath: /swagger
+    plan: free
+
