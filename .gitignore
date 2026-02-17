@@ -112,3 +112,5 @@ _ReSharper*/
 .env.local
 appsettings.Development.json
 
+Properties/PublishProfiles/
+git
