@@ -31,11 +31,9 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Enable Swagger in all environments (including production) for API documentation
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors("AllowAllOrigins");
 
@@ -285,6 +283,14 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast")
+.WithOpenApi();
+
+// Health check endpoint for Render
+app.MapGet("/health", () =>
+{
+    return Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow });
+})
+.WithName("HealthCheck")
 .WithOpenApi();
 
 app.Run();
