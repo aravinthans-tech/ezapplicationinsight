@@ -1,9 +1,8 @@
 services:
   - type: web
     name: telemetry-api
-    env: dotnet
-    buildCommand: dotnet publish -c Release -o ./publish
-    startCommand: dotnet ./publish/TelemetryAPI.dll
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
